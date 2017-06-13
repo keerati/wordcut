@@ -42,9 +42,8 @@ gulp.task('replace', ['copy'], function() {
  */
 gulp.task('brfs', ['copy', 'concat', 'replace'], function() {
   var file = './dist/tmp/wordcut.js';
-  return browserify(file)
+  return browserify(file, {standalone: 'lunr.wordcut'})
   .transform('brfs')
-  .require(file, {expose: 'wordcut'})
   .bundle()
   .pipe(fs.createWriteStream('./dist/wordcut.js'));
 });
